@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +24,12 @@ import web.service.face.BuyerService;
 @Controller
 public class BuyerController {
 	
-	@RequestMapping(value="/buyer/main", method=RequestMethod.GET)
+	private static final Logger logger = LoggerFactory.getLogger(BuyerController.class);
+	@Autowired BuyerService buyerService;
 
+	@RequestMapping(value="/buyer/main", method=RequestMethod.GET)
 	public void buyerMain() { }
 	
-	
-@Autowired BuyerService buyerService;
 	
 	
 	@RequestMapping(value="/buyer/join", method=RequestMethod.GET)
@@ -57,9 +59,6 @@ public class BuyerController {
 		
 		buyerService.mailSender(email, subject, body);
 		
-		
-		
-		
 		return "jsonView";
 		
 	}
@@ -71,7 +70,6 @@ public class BuyerController {
 		System.out.println("넘어온 이메일"+email);
 		
 		int emailCnt = buyerService.eamilSerch(email);
-		
 		
 		model.addAttribute("emailCnt", emailCnt);
 		return "jsonView";
@@ -87,22 +85,24 @@ public class BuyerController {
 	public String useid(Model model, BuyerInfo bi) {
 		
 		boolean id = buyerService.haveId(bi);
-		
-		
+
 		Map map = new HashMap();
+		
 		if(id) {
 			map.put("haveId", true);
-		}else {
-			map.put("haveId", false);
 			
+		} else {
+			map.put("haveId", false);	
 		}
 		
 		model.addAllAttributes(map);
 		
 		return "jsonView";
 	}
-		
-		//회원가입
+	
+	
+	
+	//회원가입
 	@RequestMapping(value="/buyer/join", method=RequestMethod.POST)
 	public String buyerJoin(BuyerInfo buyerInfo) {
 		
@@ -188,23 +188,17 @@ public class BuyerController {
 					
 			out.flush();
 			
-		}else {
+		} else {
 			
 			out.println("<script>alert('다시 확인해주세요'); location.href='/buyer/findid'</script>" );
 			
 			out.flush();
-	
-		
 		}
 	}
 	
 	
 	
-	
-	
 	//비밀번호찾기
-	
-	
 	@RequestMapping(value="/buyer/findpw", method=RequestMethod.GET)
 	public void buyerFindPwForm() {
 		
@@ -212,8 +206,6 @@ public class BuyerController {
 	
 	@RequestMapping(value="/buyer/findpw", method=RequestMethod.POST)
 	public void buyerFindPw(BuyerInfo buyerInfo, HttpServletResponse res) throws IOException {
-		
-
 		
 		PrintWriter out = null;
 		res.setContentType("text/html; charset=UTF-8");
@@ -254,15 +246,12 @@ public class BuyerController {
 					
 			out.flush();
 			
-		}else {
+		} else {
 			
 			out.println("<script>alert('다시 확인해주세요'); location.href='/buyer/findpw'</script>" );
 			
 			out.flush();
-	
-		
-		}
-		
+		}	
 	}
 	
 	

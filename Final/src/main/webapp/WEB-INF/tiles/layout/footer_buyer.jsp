@@ -2,5 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="footer">
-	<h1>구매자 FOOTER</h1>
+	
+	<img alt="Footer" src="/img/footer.PNG" width="100%" style="padding: 0;">
+	
 </div>

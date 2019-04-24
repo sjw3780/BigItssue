@@ -19,7 +19,7 @@ import web.service.face.BuyerService;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
-@Autowired BuyerDao buyerDao;
+	@Autowired BuyerDao buyerDao;
 	
 	@Override
 	public boolean haveId(BuyerInfo bi) {
