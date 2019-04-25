@@ -4,27 +4,24 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 
-	<filter-mapping>
-	  <filter-name>encodingFilter</filter-name>
-	  <url-pattern>/*</url-pattern>
-
-		<!-- encodingFilter라는 이름으로 class 생성 -->
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
-		<!-- CharacterEncdoingFilter 객체가 생성될 때 UTF-8로 초기화 -->
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<!-- encodingFilter를 모든 url에 적용 -->
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-
-	</filter-mapping>
+	<!-- POST 데이터 한글인코딩(UTF-8) 필터 -->
+   <filter>
+      <!-- encodingFilter라는 이름으로 class 생성 -->
+      <filter-name>encodingFilter</filter-name>
+      <filter-class>
+         org.springframework.web.filter.CharacterEncodingFilter
+      </filter-class>
+      <!-- CharacterEncdoingFilter 객체가 생성될 때 UTF-8로 초기화 -->
+      <init-param>
+         <param-name>encoding</param-name>
+         <param-value>UTF-8</param-value>
+      </init-param>
+   </filter>
+   <!-- encodingFilter를 모든 url에 적용 -->
+   <filter-mapping>
+      <filter-name>encodingFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
