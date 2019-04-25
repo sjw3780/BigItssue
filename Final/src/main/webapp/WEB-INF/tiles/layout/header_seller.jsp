@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <style type="text/css">
 	
@@ -68,8 +69,17 @@
 			</ul>
 		</div>
 		
-		<div>
-			<button id="sellerLogin" class="btn">로그인</button>
+		<div id="sellerLogin">
+			<c:if test="${not sellerLogin }">
+				로그인이 필요합니다
+			</c:if>
+			<c:if test="${sellerLogin }">
+				<c:if test="${sellerInfo.sellerImg eq null }">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+				</c:if>
+				${sellerId }님, 환영합니다&nbsp;
+				<a href="/seller/logout"><button id="sellerLogout" class="btn btn-sm btn-primary">로그아웃</button></a>
+			</c:if>
 		</div>
 	</nav>
 	
