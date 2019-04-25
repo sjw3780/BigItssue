@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,18 +18,60 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import web.dto.BuyerInfo;
+import web.dto.SellerLoc;
+import web.dto.User;
 import web.service.face.BuyerService;
+import web.util.SellerLocPaging;
 
 @Controller
 public class BuyerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BuyerController.class);
+	
 	@Autowired BuyerService buyerService;
 
 	@RequestMapping(value="/buyer/main", method=RequestMethod.GET)
-	public void buyerMain() { }
+	public void buyerMain(
+			@RequestParam(defaultValue="0") String curPage,
+			Model model) { 
+		
+		//현재 페이지 번호 얻기
+		logger.info("curPage:"+curPage);
+		
+		//총 게시글 수 얻기
+		int totalCount = buyerService.getTotalCountOfSellerLoc();
+		
+		logger.info("totalCount:"+totalCount);
+		
+		//페이지 객체 생성
+		SellerLocPaging paging = new SellerLocPaging(totalCount, Integer.parseInt(curPage));
+		
+		logger.info("paging:"+paging);
+		
+		List<SellerLoc> sellerLocList = buyerService.getPagingListOfSellerLoc(paging);
+		
+		logger.info("sellerLocList:"+sellerLocList);
+			
+		//조회 결과를 VIEW에 전달하기
+		model.addAttribute("sellerLocList", sellerLocList);
+
+		//페이징 객체 MODEL로 추가
+		model.addAttribute("paging", paging);
+		
+	}
+	
+	@RequestMapping(value="/buyer/locview", method=RequestMethod.GET)
+	public void buyerLocView() {
+		
+	}
+	
+	@RequestMapping(value="/buyer/sellerLocMap", method=RequestMethod.GET)
+	public void buyerSellerLocMap() {
+		
+	}
 	
 	
 	
@@ -126,12 +169,23 @@ public class BuyerController {
 		
 		System.out.println(buyerInfo.getBuyerId());
 		
+		//chat에서 session정보를 가져올때
+		//User라는(판매자,빅돔,구매자)정보 모두를 포함하는 dto의 정보를  불러와야해서 만듦.
+		User LoginInfo = null;
+		
 		if(user) {
-			session.setAttribute("haveBuyerId", true);
+			session.setAttribute("buyerLogin", true);
 			session.setAttribute("buyerId", buyerInfo.getBuyerId());
+			
+			//chat에서 session정보를 가져올때
+			//User라는(판매자,빅돔,구매자)정보 모두를 포함하는 dto의 정보를  불러와야해서 만듦.
+			//buyerId로 Buyer정보 검색(반환User)
+			LoginInfo = buyerService.getBuyerInfo(buyerInfo);
+			session.setAttribute("LoginInfo", LoginInfo);
+			
 			return "redirect:/buyer/login";
 		}
-		session.setAttribute("haveBuyerId", false);
+		session.setAttribute("buyerLogin", false);
 		return "redirect:/buyer/login";
 		
 		

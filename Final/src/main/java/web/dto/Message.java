@@ -9,6 +9,8 @@ public class Message { // 채팅내용
 	private String chatContent; // 채팅내용
 	private Date chatDate; // 채팅날짜
 	private int chatRoomNo; // 채팅방번호
+	private String stringChatDate;//String타입의 채팅날짜 - 추가이유 : date타입으로는 이쁘게 변환이 안됨.
+									//DB에 Date타입으로 저장되어 있는것을 채팅창에 보여줄때 이곳에 String으로 변환된것을 저장하여 사용중.
 	
 	public int getChatMessageNo() {
 		return chatMessageNo;
@@ -40,11 +42,17 @@ public class Message { // 채팅내용
 	public void setChatRoomNo(int chatRoomNo) {
 		this.chatRoomNo = chatRoomNo;
 	}
-
+	public String getStringChatDate() {
+		return stringChatDate;
+	}
+	public void setStringChatDate(String stringChatDate) {
+		this.stringChatDate = stringChatDate;
+	}
 	@Override
 	public String toString() {
 		return "Message [chatMessageNo=" + chatMessageNo + ", chatSender=" + chatSender + ", chatContent=" + chatContent
-				+ ", chatDate=" + chatDate + ", chatRoomNo=" + chatRoomNo + "]";
+				+ ", chatDate=" + chatDate + ", chatRoomNo=" + chatRoomNo + ", stringChatDate=" + stringChatDate + "]";
 	}
+	
 	
 }
