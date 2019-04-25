@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import web.dao.face.BuyerDao;
 import web.dto.BuyerInfo;
+import web.dto.User;
 import web.service.face.BuyerService;
+import web.util.SellerLocPaging;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
@@ -144,6 +147,24 @@ public class BuyerServiceImpl implements BuyerService {
 	public int eamilSerch(String email) {
 		
 		return buyerDao.eamilSerch(email);
+	}
+	
+	//판매처 총 게시글 수 얻기
+	@Override
+	public int getTotalCountOfSellerLoc() {
+		return buyerDao.selectCntOfSellerLoc();
+	}
+
+	@Override
+	public List getPagingListOfSellerLoc(SellerLocPaging paging) {
+		return buyerDao.selectPaginglistOfSellerLoc(paging);
+	}
+	
+	//buyerId로 Buyer정보 검색(반환User)
+	@Override
+	public User getBuyerInfo(BuyerInfo buyerInfo) {
+		return buyerDao.selectBuyerInfoByBuyerId(buyerInfo);
+		
 	}
 
 }

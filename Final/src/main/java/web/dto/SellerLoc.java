@@ -10,7 +10,7 @@ public class SellerLoc { // 판매자 판매정보
 	private String sellerTimeE; // 판매종료시간
 	private String sellerCard; // 카드결제여부 - 가능, 불가능
 	private int magazineNo; // 판매부수번호 (fk)
-	private String sellerId; // 구매자아이디 (fk)
+	private String sellerId; // 판매자아이디 (fk)
 	private String bigdomId; // 빅돔아이디 (fk)
 
 	@Override

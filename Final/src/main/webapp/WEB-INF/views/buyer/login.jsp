@@ -14,7 +14,7 @@
 
 
 
-<c:if test="${not haveBuyerId }">
+<c:if test="${not buyerLogin }">
 <form action="/buyer/login" method="POST" >
 
 	 
@@ -31,10 +31,8 @@
 </form>
 </c:if>
 
-<c:if test="${haveBuyerId }">
+<c:if test="${buyerLogin }">
 <strong>${buyerId } 님, 환영합니다</strong> 
 <a href="#"><input type="button" value="main"></a>
 	<a href="/buyer/logout"><input type="button" value="로그아웃"></a>
 </c:if>
-
-${buyerId }
