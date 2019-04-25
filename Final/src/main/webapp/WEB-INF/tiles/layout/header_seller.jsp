@@ -61,10 +61,10 @@
 					<a href="/seller/time">판매 관리</a>
 				</li>
 				<li>
-					<a href="/seller/review/list/all">빅돔 후기</a>
+					<a href="/seller/review/list">빅돔 후기</a>
 				</li>
 				<li>
-					<a href="/seller/booking/list">예약 내역</a>
+					<a href="/seller/bookinglist">예약 내역</a>
 				</li>
 			</ul>
 		</div>
