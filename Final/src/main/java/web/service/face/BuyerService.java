@@ -1,6 +1,10 @@
 package web.service.face;
 
+import java.util.List;
+
 import web.dto.BuyerInfo;
+import web.dto.User;
+import web.util.SellerLocPaging;
 
 public interface BuyerService {
 	public boolean haveId(BuyerInfo bi);
@@ -22,4 +26,15 @@ public interface BuyerService {
 	public void pwUpdate(BuyerInfo buyerInfo);
 
 	public int eamilSerch(String email);
+	
+	//buyerId로 Buyer정보 검색(반환User)
+	public User getBuyerInfo(BuyerInfo buyerInfo);
+	
+	//-----SellerLoc-----
+	//판매처 총 게시글 수 얻기
+	public int getTotalCountOfSellerLoc();
+	
+	//판매처 페이징 리스트 얻기
+	public List getPagingListOfSellerLoc(SellerLocPaging paging);
+	
 }

@@ -1,18 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-	
-});
+function upOpentime(sysHour, sysMin) {
+	$(location).attr("href", "/seller/upOpentime?startTime1="+sysHour+"&startTime2="+sysMin);
+}
+
+function upClosetime(sysHour, sysMin) {
+	$(location).attr("href", "/seller/upClosetime?endTime1="+sysHour+"&endTime2="+sysMin);
+}
+
+function mDelete(magazineNo) {
+	result = confirm('판매중인 빅이슈를 삭제하시겠습니까?'+'\n'+
+						'삭제 후에는 변경할 수 없습니다.');
+	console.log(result);
+	if(result==true) {
+		$(location).attr("href", "/seller/mDelete?magazineNo="+magazineNo);
+	} else {
+		return false;
+	}
+}
 
 </script>
 
-<div style="text-align: center;">
-<button id="btnOpen" class="btn btn-default">오픈</button>
-<button id="btnClose" class="btn btn-default">마감</button>
+<div style="padding: 10px;">
+* 판매자가 지정한 시간 외에 오픈/마감 시간을 변경하고 싶다면, 아래 버튼을 누르세요.<br>
+&nbsp;&nbsp;오픈/마감 시간에 따라 버튼이 비활성화됩니다<br>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="HH" var="sysHour" />
+<fmt:formatDate value="${now}" pattern="mm" var="sysMin" />
+<%-- 현재 시 : <c:out value="${sysHour}"/> --%>
+<%-- 현재 분 : <c:out value="${sysMin}"/> --%>
+<c:if test="${sysHour ge startTime1 }">
+	<c:if test="${sysHour lt endTime1 }">
+		&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" disabled>오픈</button>
+		<button id="btnClose" class="btn btn-default" onclick="upClosetime(${sysHour}, ${sysMin })">마감</button>
+	</c:if>
+	
+	<c:if test="${sysHour ge endTime1 }">
+		&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" disabled>오픈</button>
+		<button id="btnClose" class="btn btn-default" disabled>마감</button>
+	</c:if>
+</c:if>
+
+<c:if test="${sysHour lt startTime1 }">
+	&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" onclick="upOpentime(${sysHour }, ${sysMin })">오픈</button>
+	<button id="btnClose" class="btn btn-default" disabled>마감</button>
+</c:if>
+
 </div>
 
 <div style="padding: 10px;">
@@ -27,7 +65,7 @@ $(document).ready(function() {
 	<td style="width: 20%">분류</td>
 	<td style="width: 35%">오픈시간</td>
 	<td style="width: 35%">마감시간</td>
-	<td style="width: 10%"></td>
+	<td style="width: 10%">변경</td>
 </tr>
 </thead>
 
@@ -126,13 +164,13 @@ $(document).ready(function() {
 <c:forEach items="${bookListInfo }" var="b">
 <tr>
 <%-- 	<td>${b.magazineNo }</td> --%>
-	<form action="/seller/mUpdate?magazineNo=${b.magazineNo }" method="post" style="display: inline">
+	<form action="/seller/mUpdate?magazineNo=${b.magazineNo }" method="post" style="display: inline" >
 	<td><input style="width: 150px; text-align:center;" type="text" name="month" value="${b.month }"/></td>
 	<td>
 		<input style="width: 30px; text-align:center;" name="circulation" type="text" value="${b.circulation }"/>&nbsp;
 		<button class="btn btn-xs btn-default">변경</button>
 	</form>
-		<a href="/seller/mDelete?magazineNo=${b.magazineNo }"><button class="btn btn-xs btn-danger">삭제</button></a>
+		<button id="mDelete" class="btn btn-xs btn-danger" onclick="mDelete(${b.magazineNo })">삭제</button>
 	</td>
 </tr>
 </c:forEach>

@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
 <style type="text/css">
 	/* 모든 페이지에 적용되는 스타일 */
 	
@@ -26,7 +25,8 @@
 /* 		margin: 0 auto; */
 /* 		border: 1px solid #ccc; */
 /* 	} */
-	
+
+
 </style>
 
 <script type="text/javascript">
