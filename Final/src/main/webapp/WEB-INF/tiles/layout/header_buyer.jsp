@@ -69,14 +69,16 @@ $(document).ready(function() {
 			</ul>			
 			
 			<div id="btnBox">
-			<c:if test="${not login }">
+			<!-- 로그인 상태 session이 판매자,구매자,관리자 나뉘어져 있어서 login=>buyerLogin으로 변경 -->
+			<c:if test="${not buyerLogin }">
 				<button id="btnLogin" class="btn">로그인</button>
 				<button id="btnJoin" class="btn">회원가입</button>
 			</c:if>
 
-			<c:if test="${login }">
-				${id }님
-				<button id="btnLogout" class="btn">로그아웃</button>
+			<c:if test="${buyerLogin }">
+				<!-- 로그인 상태 session이 판매자,구매자,관리자 나뉘어져 있어서 ${id}=>${buyerId }으로 변경 -->
+				${buyerId }님
+				<button id="btnLogout" class="btn" onclick="location.href='/buyer/logout'">로그아웃</button>
 				<button id="btnMypage" class="btn">마이페이지</button>
 			</c:if>
 			</div>
