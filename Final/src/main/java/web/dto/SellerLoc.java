@@ -7,17 +7,22 @@ public class SellerLoc { // 판매자 판매정보
 	private String station; // 판매장소(역) - 서울:역이름, 그외지역:판매장소이름
 	private String spot; // 출구(위치) - 서울:출구번호, 그외지역:판매위치
 	private String sellerTimeS; // 판매시작시간
+	private String startTime1; // 판매시작시간-jsp에서 가져올 값(추가)
+	private String startTime2; // 판매시작시간-jsp에서 가져올 값(추가)
 	private String sellerTimeE; // 판매종료시간
+	private String endTime1; // 판매종료시간-jsp에서 가져올 값(추가)
+	private String endTime2; // 판매종료시간-jsp에서 가져올 값(추가)
 	private String sellerCard; // 카드결제여부 - 가능, 불가능
 	private int magazineNo; // 판매부수번호 (fk)
 	private String sellerId; // 구매자아이디 (fk)
 	private String bigdomId; // 빅돔아이디 (fk)
-
+	
 	@Override
 	public String toString() {
 		return "SellerLoc [locNo=" + locNo + ", zone=" + zone + ", station=" + station + ", spot=" + spot
-				+ ", sellerTimeS=" + sellerTimeS + ", sellerTimeE=" + sellerTimeE + ", sellerCard=" + sellerCard
-				+ ", magazineNo=" + magazineNo + ", sellerId=" + sellerId + ", bigdomId=" + bigdomId + "]";
+				+ ", sellerTimeS=" + sellerTimeS + ", startTime1=" + startTime1 + ", startTime2=" + startTime2
+				+ ", sellerTimeE=" + sellerTimeE + ", endTime1=" + endTime1 + ", endTime2=" + endTime2 + ", sellerCard="
+				+ sellerCard + ", magazineNo=" + magazineNo + ", sellerId=" + sellerId + ", bigdomId=" + bigdomId + "]";
 	}
 	
 	public int getLocNo() {
@@ -50,11 +55,35 @@ public class SellerLoc { // 판매자 판매정보
 	public void setSellerTimeS(String sellerTimeS) {
 		this.sellerTimeS = sellerTimeS;
 	}
+	public String getStartTime1() {
+		return startTime1;
+	}
+	public void setStartTime1(String startTime1) {
+		this.startTime1 = startTime1;
+	}
+	public String getStartTime2() {
+		return startTime2;
+	}
+	public void setStartTime2(String startTime2) {
+		this.startTime2 = startTime2;
+	}
 	public String getSellerTimeE() {
 		return sellerTimeE;
 	}
 	public void setSellerTimeE(String sellerTimeE) {
 		this.sellerTimeE = sellerTimeE;
+	}
+	public String getEndTime1() {
+		return endTime1;
+	}
+	public void setEndTime1(String endTime1) {
+		this.endTime1 = endTime1;
+	}
+	public String getEndTime2() {
+		return endTime2;
+	}
+	public void setEndTime2(String endTime2) {
+		this.endTime2 = endTime2;
 	}
 	public String getSellerCard() {
 		return sellerCard;
