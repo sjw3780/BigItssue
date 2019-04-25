@@ -56,5 +56,42 @@
 		SET sellerTimeS=#{sellerTimeS }, sellerTimeE=#{sellerTimeE }
 		WHERE sellerId=#{sellerId }
 	</update>
+	
+	<select id="selectReserve"
+	 parameterType="String" resultType="web.dto.Reservation">
+		SELECT * FROM reservation
+		WHERE sellerId=#{sellerId }
+		ORDER BY reserveNo desc
+	</select>
+	
+	<update id="updateToCancelReserve" parameterType="int">
+		UPDATE reservation
+		SET status='예약취소'
+		WHERE reserveNo=#{reserveNo }
+	</update>
+	
+	<update id="updateToCompleteReserve" parameterType="int">
+		UPDATE reservation
+		SET status='수령'
+		WHERE reserveNo=#{reserveNo }
+	</update>
+	
+	<update id="updatePickupDate" parameterType="web.dto.Reservation">
+		UPDATE reservation
+		SET status='예약취소(시간초과)'
+		WHERE reserveNo=#{reserveNo }
+	</update>
+	
+	<update id="updateStartTime" parameterType="web.dto.SellerLoc">
+		UPDATE sellerLoc
+		SET sellerTimeS=#{sellerTimeS }
+		WHERE sellerId=#{sellerId }
+	</update>
+	
+	<update id="updateEndTime" parameterType="web.dto.SellerLoc">
+		UPDATE sellerLoc
+		SET sellerTimeE=#{sellerTimeE }
+		WHERE sellerId=#{sellerId }
+	</update>
 
 </mapper>

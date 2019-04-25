@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import web.dao.face.SellerDao;
 import web.dto.BookListInfo;
+import web.dto.Reservation;
 import web.dto.SellerInfo;
 import web.dto.SellerLoc;
 import web.service.face.SellerService;
@@ -62,6 +63,36 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public void setSellerTime(SellerLoc sellerLoc) {
 		sellerDao.updateSellerTime(sellerLoc);
+	}
+
+	@Override
+	public List<Reservation> getReserve(String sellerId) {
+		return sellerDao.selectReserve(sellerId);
+	}
+
+	@Override
+	public void cancelReserve(int reserveNo) {
+		sellerDao.updateToCancelReserve(reserveNo);
+	}
+
+	@Override
+	public void updateReserve(int reserveNo) {
+		sellerDao.updateToCompleteReserve(reserveNo);
+	}
+
+	@Override
+	public void setPickupDate(Reservation bookList) {
+		sellerDao.updatePickupDate(bookList);
+	}
+
+	@Override
+	public void setStartTime(SellerLoc sellerLoc) {
+		sellerDao.updateStartTime(sellerLoc);
+	}
+
+	@Override
+	public void setEndTime(SellerLoc sellerLoc) {
+		sellerDao.updateEndTime(sellerLoc);
 	}
 
 }
