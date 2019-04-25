@@ -151,5 +151,10 @@ public class SellerController {
 		
 		return "redirect:/seller/time";
 	}
+	
+	@RequestMapping(value="/seller/bookinglist", method=RequestMethod.GET)
+	public void bookingList() {
+		
+	}
 
 }
