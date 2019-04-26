@@ -30,6 +30,7 @@ function inquire(id,sort){
 <h1>locview페이지</h1>
 <div class="wrap container">
 <div style="padding: 10px;">
+<!-- 판매자,빅돔 테이블 -->
 <table class="table table-bordered">
 	<thead>
 	<tr>
@@ -57,6 +58,28 @@ function inquire(id,sort){
 		<td>${sellerLoc.sellerTimeS } ~ ${sellerLoc.sellerTimeE}</td>
 		<td>${sellerLoc.bigdomId } (빅돔)<button class="btn btn-info btn-sm fr" onclick="inquire('${sellerLoc.bigdomId}','빅돔')">문의하기</button></td>
 		</tr>
+	</tbody>
+</table>
+
+<!-- 예약테이블 -->
+<table class="table table-bordered">
+	<thead>
+	<tr>
+	<th style="width: 33%">호수</th>
+	<th style="width: 33%">보유부수</th>
+	<th style="width: 33%">부수선택</th>
+	</tr>
+	</thead>
+	<tbody>
+	
+		<!-- 판매자 -->
+		<tr>
+		<td>${sellerLoc.zone }</td>
+		<td>${sellerLoc.station } ${sellerLoc.spot }</td>
+		<td>${sellerLoc.sellerTimeS } ~ ${sellerLoc.sellerTimeE}</td>
+		<td>${sellerLoc.sellerId } (판매자)<button class="btn btn-warning btn-sm fr" onclick="inquire('${sellerLoc.sellerId}','판매자')">문의하기</button></td>
+		</tr>
+		
 	</tbody>
 </table>
 </div>

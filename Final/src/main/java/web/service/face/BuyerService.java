@@ -2,6 +2,7 @@ package web.service.face;
 
 import java.util.List;
 
+import web.dto.BookListInfo;
 import web.dto.BuyerInfo;
 import web.dto.SellerLoc;
 import web.dto.User;
@@ -39,5 +40,7 @@ public interface BuyerService {
 	public List getPagingListOfSellerLoc(SellerLocPaging paging);
 	
 	public SellerLoc getSellerLoc(int sellerLoc);
+	
+	public BookListInfo getBookListInfo(int magazineNo);
 	
 }

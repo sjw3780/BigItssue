@@ -2,6 +2,7 @@ package web.dao.face;
 
 import java.util.List;
 
+import web.dto.BookListInfo;
 import web.dto.BuyerInfo;
 import web.dto.SellerLoc;
 import web.dto.User;
@@ -38,5 +39,7 @@ public interface BuyerDao {
 	public List selectPaginglistOfSellerLoc(SellerLocPaging paging);
 	
 	public SellerLoc selectSellerLoc(int sellerLoc);
+	
+	public BookListInfo selectBookListInfo(int magazineNo);
 	
 }

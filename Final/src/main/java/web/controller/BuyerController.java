@@ -2,8 +2,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.dto.BookListInfo;
 import web.dto.BuyerInfo;
 import web.dto.SellerLoc;
 import web.dto.User;
@@ -75,8 +74,13 @@ public class BuyerController {
 		logger.info("sellerLoc:"+sellerLoc);
 		
 		model.addAttribute("sellerLoc", sellerLoc);
+				
+		//locNo에 맞는 magazineNo으로 북리스트 조회
+		BookListInfo bookListInfo = buyerService.getBookListInfo(sellerLoc.getMagazineNo());
 		
-//		int magazineNo = 
+		logger.info("bookListInfo:"+bookListInfo);
+		
+		model.addAttribute("bookListInfo", bookListInfo);
 		
 		
 	}
