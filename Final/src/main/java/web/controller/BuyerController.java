@@ -167,7 +167,7 @@ public class BuyerController {
 		
 		boolean user = buyerService.buyerLogin(buyerInfo);
 		
-		System.out.println(buyerInfo.getBuyerId());
+//		System.out.println(buyerInfo.getBuyerId());
 		
 		//chat에서 session정보를 가져올때
 		//User라는(판매자,빅돔,구매자)정보 모두를 포함하는 dto의 정보를  불러와야해서 만듦.
@@ -183,7 +183,7 @@ public class BuyerController {
 			LoginInfo = buyerService.getBuyerInfo(buyerInfo);
 			session.setAttribute("LoginInfo", LoginInfo);
 			
-			return "redirect:/buyer/login";
+			return "redirect:/buyer/main";
 		}
 		session.setAttribute("buyerLogin", false);
 		return "redirect:/buyer/login";
@@ -308,8 +308,28 @@ public class BuyerController {
 		}	
 	}
 	
+	@RequestMapping(value="/buyer/my/booking", method=RequestMethod.GET)
+	public void myBooking() { // 마이페이지-예약내역
+		
+	}
 	
+	@RequestMapping(value="/buyer/my/chat", method=RequestMethod.GET)
+	public void myChat() { // 마이페이지-문의내역
+		
+	}
 	
+	@RequestMapping(value="/buyer/my/info", method=RequestMethod.GET)
+	public void myInfo() { // 마이페이지-정보수정
+		
+	}
 	
-
+	@RequestMapping(value="/buyer/my/confirmpw", method=RequestMethod.POST)
+	public String myPwConfirm(BuyerInfo buyerInfo) { // 마이페이지-정보수정 -> 비밀번호확인
+		
+//		logger.info(buyerInfo.toString());
+		
+		
+		
+		return "redirect:/buyer/my/info";
+	}
 }

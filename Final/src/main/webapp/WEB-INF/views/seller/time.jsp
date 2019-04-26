@@ -16,7 +16,7 @@ function upClosetime(sysHour, sysMin) {
 function mDelete(magazineNo) {
 	result = confirm('판매중인 빅이슈를 삭제하시겠습니까?'+'\n'+
 						'삭제 후에는 변경할 수 없습니다.');
-	console.log(result);
+// 	console.log(result);
 	if(result==true) {
 		$(location).attr("href", "/seller/mDelete?magazineNo="+magazineNo);
 	} else {
@@ -29,24 +29,34 @@ function mDelete(magazineNo) {
 <div style="padding: 10px;">
 * 판매자가 지정한 시간 외에 오픈/마감 시간을 변경하고 싶다면, 아래 버튼을 누르세요.<br>
 &nbsp;&nbsp;오픈/마감 시간에 따라 버튼이 비활성화됩니다<br>
+
+<!-- 현재시간 가져오기 -->
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="HH" var="sysHour" />
 <fmt:formatDate value="${now}" pattern="mm" var="sysMin" />
+<fmt:formatDate value="${now}" pattern="HHmm" var="sysTime" />
 <%-- 현재 시 : <c:out value="${sysHour}"/> --%>
 <%-- 현재 분 : <c:out value="${sysMin}"/> --%>
-<c:if test="${sysHour ge startTime1 }">
-	<c:if test="${sysHour lt endTime1 }">
+
+<!-- 마감시간 전 -->
+${sysTime }//${sellerTimeE }//${sellerTimeS }
+<c:if test="${sysTime lt sellerTimeE }">
+	<c:if test="${sysTime ge sellerTimeS }">
 		&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" disabled>오픈</button>
 		<button id="btnClose" class="btn btn-default" onclick="upClosetime(${sysHour}, ${sysMin })">마감</button>
 	</c:if>
-	
-	<c:if test="${sysHour ge endTime1 }">
-		&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" disabled>오픈</button>
-		<button id="btnClose" class="btn btn-default" disabled>마감</button>
-	</c:if>
 </c:if>
+	
+<!-- 마감시간 후 -->
+<c:if test="${sysTime ge sellerTimeE }">
+	&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" disabled>오픈</button>
+	<button id="btnClose" class="btn btn-default" disabled>마감</button>
+</c:if>
+<%-- ${sysHour }${sysMin } --%>
+<%-- ${startTime1 }${startTime2 } --%>
 
-<c:if test="${sysHour lt startTime1 }">
+<!-- 오픈시간 전 -->
+<c:if test="${sysTime lt sellerTimeS }">
 	&nbsp;&nbsp;<button id="btnOpen" class="btn btn-default" onclick="upOpentime(${sysHour }, ${sysMin })">오픈</button>
 	<button id="btnClose" class="btn btn-default" disabled>마감</button>
 </c:if>
