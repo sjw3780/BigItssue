@@ -5,6 +5,7 @@ import java.util.List;
 import web.dto.BookListInfo;
 import web.dto.SellerInfo;
 import web.dto.SellerLoc;
+import web.dto.User;
 
 public interface SellerDao {
 
@@ -31,5 +32,8 @@ public interface SellerDao {
 
 	// 오픈 마감시간 업데이트 쿼리
 	public void updateSellerTime(SellerLoc sellerLoc);
+	
+	//User으로 정보가 필요해서 추가
+	public User selectSellerInfoUser(SellerInfo sellerInfo);
 
 }

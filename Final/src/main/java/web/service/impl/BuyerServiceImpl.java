@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import web.dao.face.BuyerDao;
 import web.dto.BuyerInfo;
+import web.dto.SellerLoc;
 import web.dto.User;
 import web.service.face.BuyerService;
 import web.util.SellerLocPaging;
@@ -165,6 +166,11 @@ public class BuyerServiceImpl implements BuyerService {
 	public User getBuyerInfo(BuyerInfo buyerInfo) {
 		return buyerDao.selectBuyerInfoByBuyerId(buyerInfo);
 		
+	}
+
+	@Override
+	public SellerLoc getSellerLoc(int sellerLoc) {
+		return buyerDao.selectSellerLoc(sellerLoc);
 	}
 
 }

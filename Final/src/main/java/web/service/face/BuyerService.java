@@ -3,6 +3,7 @@ package web.service.face;
 import java.util.List;
 
 import web.dto.BuyerInfo;
+import web.dto.SellerLoc;
 import web.dto.User;
 import web.util.SellerLocPaging;
 
@@ -36,5 +37,7 @@ public interface BuyerService {
 	
 	//판매처 페이징 리스트 얻기
 	public List getPagingListOfSellerLoc(SellerLocPaging paging);
+	
+	public SellerLoc getSellerLoc(int sellerLoc);
 	
 }

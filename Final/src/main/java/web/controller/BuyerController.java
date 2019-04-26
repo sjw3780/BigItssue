@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,18 @@ public class BuyerController {
 	}
 	
 	@RequestMapping(value="/buyer/locview", method=RequestMethod.GET)
-	public void buyerLocView() {
+	public void buyerLocView(int locNo, Model model) {
+		
+		logger.info("locNo:"+locNo);
+		//locNo에 맞는 SellerLoc 조회
+		SellerLoc sellerLoc = buyerService.getSellerLoc(locNo);
+		
+		logger.info("sellerLoc:"+sellerLoc);
+		
+		model.addAttribute("sellerLoc", sellerLoc);
+		
+//		int magazineNo = 
+		
 		
 	}
 	
@@ -177,9 +190,7 @@ public class BuyerController {
 			session.setAttribute("buyerLogin", true);
 			session.setAttribute("buyerId", buyerInfo.getBuyerId());
 			
-			//chat에서 session정보를 가져올때
-			//User라는(판매자,빅돔,구매자)정보 모두를 포함하는 dto의 정보를  불러와야해서 만듦.
-			//buyerId로 Buyer정보 검색(반환User)
+			//User으로 정보가 필요해서 추가
 			LoginInfo = buyerService.getBuyerInfo(buyerInfo);
 			session.setAttribute("LoginInfo", LoginInfo);
 			

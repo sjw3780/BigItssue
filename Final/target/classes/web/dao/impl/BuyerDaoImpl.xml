@@ -99,4 +99,9 @@
 		WHERE buyerId = #{buyerId}
 	</select>
 	
+	<select id="selectSellerLoc" parameterType="int" resultType="web.dto.SellerLoc">
+		SELECT * FROM sellerLoc
+		WHERE locNo = #{locNo }
+	</select>
+	
 </mapper>

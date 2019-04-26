@@ -127,7 +127,7 @@
           </div>
           <div class="type_msg">
             <div class="input_msg_write">
-              <input id="msg2" type="text" class="write_msg" placeholder="메시지를 입력해 주세요" />
+              <input id="msg" type="text" class="write_msg" placeholder="메시지를 입력해 주세요" />
               <button id="btnSend" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             </div>
           </div>
@@ -149,7 +149,7 @@ var socket=null;
 $(document).ready(function(){
 
 	//enter누르면 메시지보내기
-	$('input#msg2').keydown(function(key) {
+	$('input#msg').keydown(function(key) {
 
         if (key.keyCode == 13) {// 엔터
         	
@@ -159,12 +159,12 @@ $(document).ready(function(){
     		if(socket.readyState !== 1 ||socket.readyState == null) return;
     		
     		//보내기창 데이터가져오기
-    		let msg2 = $('input#msg2').val();
+    		let msg = $('input#msg').val();
     		
     		/* send가 핸들러쪽으로 가게 만드는 것 같음 */
-    		socket.send(msg2);
+    		socket.send(msg);
     		//보내기창 초기화
-    		$('input#msg2').val('')
+    		$('input#msg').val('')
 
         }
 
@@ -188,17 +188,7 @@ $(document).ready(function(){
 		//보내기창 초기화
 		$('.input_msg_write .write_msg').val('')
 	})
-
-	$("#login-button").on('click', function() {
-		//세션 자체를 로그아웃
-		$("#form").submit();
-	});
 	
-	$("#logout-button").on('click', function() {
-		//세션 자체를 로그아웃
-		$(location).attr("href", "/logout");
-	});
-		
 	$('#btnRoomOut').on('click',function(evt){
 		//소켓 연결 끊기
 		closeSocket();
@@ -292,7 +282,7 @@ function connect(){
 						}
 						console.log("[TEST]:"+$("#b"+refreshList[i].chatRoomNo).length)			
 						if($("#b"+refreshList[i].chatRoomNo).length<=0){//있어야할 id가 없다면 생성해주자.
-							var a = "<div class=\"chat_list\"><a href=\"/chatting?chatRoomNo="+noFlag+"\">"+noFlag+"번방</a> <div id=\"b"+noFlag+"\" onclick=\"location.href='/chatting?chatRoomNo="+noFlag+"'\"class=\"chat_people\"><div class=\"chat_img\"> <img src=\"https://ptetutorials.com/images/user-profile.png\" alt=\"sunil\"> </div><div class=\"chat_ib\"><p><span class=\"time_date\"> ["+presentDate+"]</span>"+senderId+" : "+result+"</p></div></div></div>";
+							var a = "<div class=\"chat_list\"><a href=\"/chatting?chatRoomNo="+noFlag+"\">"+noFlag+"번방["+refreshList[i].theOtherParty+"]</a> <div id=\"b"+noFlag+"\" onclick=\"location.href='/chatting?chatRoomNo="+noFlag+"'\"class=\"chat_people\"><div class=\"chat_img\"> <img src=\"https://ptetutorials.com/images/user-profile.png\" alt=\"sunil\"> </div><div class=\"chat_ib\"><p><span class=\"time_date\"> ["+presentDate+"]</span>"+senderId+" : "+result+"</p></div></div></div>";
 							inbox_chat.append(a);
 						}
 					}

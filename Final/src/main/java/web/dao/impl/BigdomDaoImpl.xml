@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="web.dao.face.BigdomDao">
+
+	<select id="selectCntLogin"
+	 parameterType="web.dto.BigdomInfo" resultType="int">
+		SELECT COUNT(*) FROM bigdomInfo
+		WHERE 1=1
+			AND bigdomId=#{bigdomId }
+			AND bigdomPw=#{bigdomPw }
+	</select>
+	
+	<resultMap type="web.dto.User" id="UserBigdom">
+			<result column="bigdomId" property="id" />
+			<result column="bigdomPw" property="pw" />
+	</resultMap>
+	<select id="selectBigdomInfoUser"
+	 parameterType="web.dto.SellerInfo" resultMap="UserBigdom">
+		SELECT * FROM bigdomInfo
+		WHERE 1=1
+			AND bigdomId=#{bigdomId }
+	</select>
+
+</mapper>
