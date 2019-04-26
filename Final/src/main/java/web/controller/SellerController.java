@@ -68,7 +68,7 @@ public class SellerController {
 		// 판매시간 조회
 		sellerLoc = sellerService.getSellerLoc(sellerId);
 		
-//		logger.info(sellerLoc.toString());
+		logger.info(sellerLoc.toString());
 		
 		String startTime = sellerLoc.getSellerTimeS();
 		String startTime1 = startTime.substring(0, 2);
@@ -90,6 +90,8 @@ public class SellerController {
 		model.addAttribute("startTime2", startTime2);
 		model.addAttribute("endTime1", endTime1);
 		model.addAttribute("endTime2", endTime2);
+		model.addAttribute("sellerTimeS", sellerLoc.getSellerTimeS());
+		model.addAttribute("sellerTimeE", sellerLoc.getSellerTimeE());
 		
 		model.addAttribute("bookListInfo", bookListInfo);
 		
@@ -105,8 +107,27 @@ public class SellerController {
 		sellerLoc.setSellerId(sellerId);
 		
 		// 변경할 시간 세팅
-		String sellerTimeS = sellerLoc.getStartTime1()+sellerLoc.getStartTime2();
-		String sellerTimeE = sellerLoc.getEndTime1()+sellerLoc.getEndTime2();
+		String startTime1 = sellerLoc.getStartTime1();
+		String startTime2 = sellerLoc.getStartTime2();
+		String sellerTimeS = "";
+		String endTime1 = sellerLoc.getEndTime1();
+		String endTime2 = sellerLoc.getEndTime2();
+		String sellerTimeE = "";
+		
+		if(Integer.parseInt(startTime2)>=0 && Integer.parseInt(startTime2)<10) {
+			sellerTimeS = startTime1 + "0" + startTime2;
+		} else {
+			sellerTimeS = startTime1 + startTime2;
+		}
+		logger.info("sellerTimeS:"+sellerTimeS);
+		
+		if(Integer.parseInt(endTime2)>=0 && Integer.parseInt(endTime2)<10) {
+			sellerTimeE = endTime1 + "0" + endTime2;
+		} else {
+			sellerTimeE = endTime1 + endTime2;
+		}
+		logger.info("sellerTimeE:"+sellerTimeE);
+		
 		sellerLoc.setSellerTimeS(sellerTimeS);
 		sellerLoc.setSellerTimeE(sellerTimeE);
 		
