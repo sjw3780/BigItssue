@@ -4,8 +4,10 @@ import java.util.List;
 
 import web.dto.BookListInfo;
 import web.dto.Reservation;
+import web.dto.Review;
 import web.dto.SellerInfo;
 import web.dto.SellerLoc;
+import web.util.Paging;
 
 public interface SellerDao {
 
@@ -50,5 +52,27 @@ public interface SellerDao {
 
 	// view에서 마감버튼 눌렀을 때 마감시간 변경 쿼리
 	public void updateEndTime(SellerLoc sellerLoc);
+	
+	
+	//총 게시글 수 반환
+	public int selectCntReview();
+
+	//페이징처리 게시글 반환
+	public List<Review> selectPaginglist(Paging paging);
+
+	//후기글 삽입
+	public void insert(Review review);
+
+	//후기글 조회수 증가
+	public void updateHit(int reviewno);
+
+	//후기글 상세 반환
+	public Review selectReviewByReviewno(int reviewno);
+
+	//후기글 수정
+	public void updateReview(Review review);
+
+	//후기글 삭제
+	public void deleteReview(int reviewno);
 
 }
