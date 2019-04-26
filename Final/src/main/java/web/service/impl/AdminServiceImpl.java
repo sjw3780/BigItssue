@@ -1,5 +1,6 @@
 package web.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,32 @@ import web.service.face.AdminService;
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired AdminDao adminDao;
+	
+	@Override
+	public int getTotalCount(HashMap doubleString) {
+		
+		return adminDao.getTotalCount(doubleString);
+	}
+
+	@Override
+	public List<SellerLoc> getPagingList(HashMap map) {
+		// TODO Auto-generated method stub
+		return adminDao.getPagingList(map);
+	}
+
+	@Override
+	public void adminSellerListDelete(SellerLoc sellerLoc) {
+		adminDao.adminSellerListDelete(sellerLoc);
+		
+	}
+
+	@Override
+	public SellerLoc getSellerInfo(SellerLoc sellerloc) {
+		return adminDao.getSellerInfo(sellerloc);
+		
+	}
+	
+	
 	
 	@Override
 	public List<SellerLoc> viewLoc(String zone) {

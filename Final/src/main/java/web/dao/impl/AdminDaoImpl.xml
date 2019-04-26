@@ -5,6 +5,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="web.dao.face.AdminDao">
+	<select id="getTotalCount" parameterType="hashMap" resultType="int"> SELECT COUNT(*) FROM sellerLoc where ${condition} like '%' || #{searchWord} || '%' order by locno desc </select>
+	<select id="getPagingList" parameterType="hashMap" resultType="web.dto.SellerLoc"> SELECT * FROM ( SELECT rownum rnum, B.* FROM ( SELECT * FROM sellerLoc WHERE ${condition} like '%' || #{searchWord} || '%' ORDER BY locno desc ) B ORDER BY rnum ) R WHERE rnum BETWEEN #{p.startNo } AND #{p.endNo } </select>
+	<delete id="adminSellerListDelete" parameterType="web.dto.SellerLoc"> DELETE sellerLoc where locNo = #{locNo } </delete>
+	<select id="getSellerInfo" parameterType="web.dto.SellerLoc" resultType="web.dto.SellerLoc"> SELECT * FROM sellerLoc where locNo = #{locNo } </select>
+	
+	
 	<select id="viewLoc" parameterType="String" resultType="web.dto.SellerLoc">
 		SELECT DISTINCT station FROM SellerLoc
 		WHERE zone LIKE '%' || #{zone } || '%'
